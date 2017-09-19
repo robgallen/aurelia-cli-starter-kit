@@ -1,18 +1,18 @@
-import {inject} from 'aurelia-framework';
+import {inject} from "aurelia-framework";
 
 @inject(Element)
 export class BlurImageCustomAttribute {
-  constructor(element) {
-    this.element = element;
-  }
+	constructor(element) {
+		this.element = element;
+	}
 
-  valueChanged(newImage) {
-    if (newImage.complete) {
-      drawBlur(this.element, newImage);
-    } else {
-      newImage.onload = () => drawBlur(this.element, newImage);
-    }
-  }
+	valueChanged(newImage) {
+		if (newImage.complete) {
+			drawBlur(this.element, newImage);
+		} else {
+			newImage.onload = () => drawBlur(this.element, newImage);
+		}
+	}
 }
 
 /* eslint-disable */
@@ -25,11 +25,11 @@ This Snippet is using a modified Stack Blur js lib for blurring the header image
 
 StackBlur - a fast almost Gaussian Blur For Canvas
 
-Version:     0.5
-Author:		Mario Klingemann
-Contact: 	mario@quasimondo.com
-Website:	http://www.quasimondo.com/StackBlurForCanvas
-Twitter:	@quasimondo
+Version: 0.5
+Author:  Mario Klingemann
+Contact: mario@quasimondo.com
+Website: http://www.quasimondo.com/StackBlurForCanvas
+Twitter: @quasimondo
 
 In case you find this class useful - especially in commercial projects -
 I am not totally unhappy for a small donation to my PayPal account
@@ -63,26 +63,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 var mul_table = [
-        512,512,456,512,328,456,335,512,405,328,271,456,388,335,292,512,
-        454,405,364,328,298,271,496,456,420,388,360,335,312,292,273,512,
-        482,454,428,405,383,364,345,328,312,298,284,271,259,496,475,456,
-        437,420,404,388,374,360,347,335,323,312,302,292,282,273,265,512,
-        497,482,468,454,441,428,417,405,394,383,373,364,354,345,337,328,
-        320,312,305,298,291,284,278,271,265,259,507,496,485,475,465,456,
-        446,437,428,420,412,404,396,388,381,374,367,360,354,347,341,335,
-        329,323,318,312,307,302,297,292,287,282,278,273,269,265,261,512,
-        505,497,489,482,475,468,461,454,447,441,435,428,422,417,411,405,
-        399,394,389,383,378,373,368,364,359,354,350,345,341,337,332,328,
-        324,320,316,312,309,305,301,298,294,291,287,284,281,278,274,271,
-        268,265,262,259,257,507,501,496,491,485,480,475,470,465,460,456,
-        451,446,442,437,433,428,424,420,416,412,408,404,400,396,392,388,
-        385,381,377,374,370,367,363,360,357,354,350,347,344,341,338,335,
-        332,329,326,323,320,318,315,312,310,307,304,302,299,297,294,292,
-        289,287,285,282,280,278,275,273,271,269,267,265,263,261,259];
+				512,512,456,512,328,456,335,512,405,328,271,456,388,335,292,512,
+				454,405,364,328,298,271,496,456,420,388,360,335,312,292,273,512,
+				482,454,428,405,383,364,345,328,312,298,284,271,259,496,475,456,
+				437,420,404,388,374,360,347,335,323,312,302,292,282,273,265,512,
+				497,482,468,454,441,428,417,405,394,383,373,364,354,345,337,328,
+				320,312,305,298,291,284,278,271,265,259,507,496,485,475,465,456,
+				446,437,428,420,412,404,396,388,381,374,367,360,354,347,341,335,
+				329,323,318,312,307,302,297,292,287,282,278,273,269,265,261,512,
+				505,497,489,482,475,468,461,454,447,441,435,428,422,417,411,405,
+				399,394,389,383,378,373,368,364,359,354,350,345,341,337,332,328,
+				324,320,316,312,309,305,301,298,294,291,287,284,281,278,274,271,
+				268,265,262,259,257,507,501,496,491,485,480,475,470,465,460,456,
+				451,446,442,437,433,428,424,420,416,412,408,404,400,396,392,388,
+				385,381,377,374,370,367,363,360,357,354,350,347,344,341,338,335,
+				332,329,326,323,320,318,315,312,310,307,304,302,299,297,294,292,
+				289,287,285,282,280,278,275,273,271,269,267,265,263,261,259];
 
 
 var shg_table = [
-	     9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17,
+			 9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17,
 		17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19,
 		19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20,
 		20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21,
@@ -110,9 +110,9 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 	var imageData;
 
 	try {
-	  imageData = context.getImageData( top_x, top_y, width, height );
+		imageData = context.getImageData( top_x, top_y, width, height );
 	} catch(e) {
-	  throw new Error("unable to access image data: " + e);
+		throw new Error("unable to access image data: " + e);
 	}
 
 	var pixels = imageData.data;
@@ -124,9 +124,9 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 
 	var div = radius + radius + 1;
 	var w4 = width << 2;
-	var widthMinus1  = width - 1;
+	var widthMinus1	= width - 1;
 	var heightMinus1 = height - 1;
-	var radiusPlus1  = radius + 1;
+	var radiusPlus1	= radius + 1;
 	var sumFactor = radiusPlus1 * ( radiusPlus1 + 1 ) / 2;
 
 	var stackStart = new BlurStack();
@@ -195,7 +195,7 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 			if ( pa != 0 )
 			{
 				pa = 255 / pa;
-				pixels[yi]   = ((r_sum * mul_sum) >> shg_sum) * pa;
+				pixels[yi]	 = ((r_sum * mul_sum) >> shg_sum) * pa;
 				pixels[yi+1] = ((g_sum * mul_sum) >> shg_sum) * pa;
 				pixels[yi+2] = ((b_sum * mul_sum) >> shg_sum) * pa;
 			} else {
@@ -212,7 +212,7 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 			b_out_sum -= stackIn.b;
 			a_out_sum -= stackIn.a;
 
-			p =  ( yw + ( ( p = x + radius + 1 ) < widthMinus1 ? p : widthMinus1 ) ) << 2;
+			p =	( yw + ( ( p = x + radius + 1 ) < widthMinus1 ? p : widthMinus1 ) ) << 2;
 
 			r_in_sum += ( stackIn.r = pixels[p]);
 			g_in_sum += ( stackIn.g = pixels[p+1]);
@@ -304,7 +304,7 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 			if ( pa > 0 )
 			{
 				pa = 255 / pa;
-				pixels[p]   = ((r_sum * mul_sum) >> shg_sum ) * pa;
+				pixels[p]	 = ((r_sum * mul_sum) >> shg_sum ) * pa;
 				pixels[p+1] = ((g_sum * mul_sum) >> shg_sum ) * pa;
 				pixels[p+2] = ((b_sum * mul_sum) >> shg_sum ) * pa;
 			} else {
@@ -360,9 +360,9 @@ function BlurStack()
 }
 
 function drawBlur(canvas, image) {
-  var w = canvas.width;
-  var h = canvas.height;
-  var canvasContext = canvas.getContext('2d');
-  canvasContext.drawImage(image, 0, 0, w, h);
-  stackBlurCanvasRGBA(canvas, 0, 0, w, h, BLUR_RADIUS);
+	var w = canvas.width;
+	var h = canvas.height;
+	var canvasContext = canvas.getContext("2d");
+	canvasContext.drawImage(image, 0, 0, w, h);
+	stackBlurCanvasRGBA(canvas, 0, 0, w, h, BLUR_RADIUS);
 };
