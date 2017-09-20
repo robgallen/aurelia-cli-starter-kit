@@ -28,7 +28,7 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
 	},
 	entry: {
 		app: ["aurelia-bootstrapper"],
-		vendor: ["bluebird"],
+		vendor: ["bluebird", "bootstrap", "jquery"],
 		polyfill: ["babel-polyfill"]
 	},
 	output: {
